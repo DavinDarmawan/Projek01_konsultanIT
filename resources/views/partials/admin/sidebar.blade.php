@@ -40,10 +40,10 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('admin.contact*') ? 'active' : '' }}" href="{{ route('admin.contact.edit', 1) }}">
-                <i class="bi bi-envelope"></i> Contact
-            </a>
-        </li>
+    <a class="nav-link {{ request()->routeIs('admin.company*') ? 'active' : '' }}" href="{{ route('admin.company.edit', 1) }}">
+        <i class="bi bi-building"></i> Company Info
+    </a>
+</li>
         <li class="nav-item mt-3">
             <a class="nav-link text-danger" href="/">
                 <i class="bi bi-box-arrow-right"></i> Lihat Website
