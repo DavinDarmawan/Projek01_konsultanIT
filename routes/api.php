@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\BenefitController;
 use App\Http\Controllers\Api\TechnologyController;
 use App\Http\Controllers\Api\CtaController;
 use App\Http\Controllers\Api\CompanyInfoController;
+use App\Http\Controllers\Api\TeamController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -36,6 +37,8 @@ Route::get('/technologies', [TechnologyController::class, 'indexPublic']);
 Route::get('/cta', [CtaController::class, 'indexPublic']);
 
 Route::get('/company', [CompanyInfoController::class, 'indexPublic']);
+Route::get('/teams', [TeamController::class, 'indexPublic']);
+Route::get('/teams/{id}', [TeamController::class, 'showPublic']);
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +61,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource(
         'admin/benefits',
         BenefitController::class
+    );
+
+    Route::apiResource(
+        'admin/teams',
+        TeamController::class
     );
 
 });
