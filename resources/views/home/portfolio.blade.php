@@ -1,55 +1,48 @@
-<section class="neo-section" id="portfolio" style="background: var(--cream);">
+<section id="portfolio" class="py-5">
     <div class="container">
-        <div class="text-center mb-5">
-            <div class="neo-badge mb-2">Portfolio</div>
-            <h2 class="neo-title" style="font-size: 2.5rem;">
-                Proyek <span style="color: var(--blue);">Unggulan</span>
-            </h2>
-            <p class="neo-subtitle">
-                Beberapa proyek yang telah kami selesaikan untuk berbagai klien.
-            </p>
+        <div class="row section-header align-items-end fade-in-up-ready">
+            <div class="col-md-8 text-start">
+                <span class="section-tagline">Studi Kasus</span>
+                <h2 class="section-title mb-0">Project Unggulan Kami</h2>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <a href="/portfolio" class="btn btn-custom btn-custom-secondary">
+                    Semua Project <i class="bi bi-grid-fill"></i>
+                </a>
+            </div>
         </div>
-        
-        <div class="row g-4">
-            @forelse($portfolios->take(4) as $portfolio)
+
+        <div class="row mt-2 g-4">
+            @forelse($portfolios->take(3) as $key => $portfolio)
                 @php
-                    $img = $portfolio->image ? asset('storage/' . $portfolio->image) : null;
-                    // Tentukan warna badge berdasarkan client atau indeks
-                    $badgeColors = ['var(--green)', 'var(--blue)', '#e65100', 'var(--yellow)'];
-                    $badgeColor = $badgeColors[$loop->index % count($badgeColors)];
+                    $img = $portfolio->image ? asset('storage/'.$portfolio->image) : null;
+                    $patternClass = $key % 2 == 0 ? 'portfolio-placeholder-pattern-1' : 'portfolio-placeholder-pattern-2';
                 @endphp
-                <div class="col-md-6 col-lg-3">
-                    <div class="neo-card h-100" style="padding: 0; overflow: hidden; background: white;">
-                        <div style="background: var(--gray); height: 180px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--black); border-bottom: 3px solid var(--black); overflow: hidden;">
+                <div class="col-lg-4 col-md-6 fade-in-up-ready delay-{{ $key }}">
+                    <div class="portfolio-wrapper">
+                        <div class="portfolio-img-container">
                             @if($img)
-                                <img src="{{ $img }}" alt="{{ $portfolio->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                <img src="{{ $img }}" alt="{{ $portfolio->title }}" style="width:100%; height:100%; object-fit:cover;">
                             @else
-                                <i class="bi bi-folder2-open"></i>
+                                <div class="portfolio-placeholder {{ $patternClass }}">
+                                    <i class="bi bi-window-sidebar text-primary fs-1"></i>
+                                </div>
                             @endif
-                        </div>
-                        <div style="padding: 1.25rem;">
-                            <span class="neo-badge" style="font-size: 0.65rem; background: {{ $badgeColor }}; color: white; border-color: var(--black);">
-                                {{ $portfolio->client ?? 'Klien' }}
-                            </span>
-                            <h5 class="fw-bold mt-2">{{ $portfolio->title }}</h5>
-                            <p style="font-size: 0.9rem; color: #555;">{{ Str::limit($portfolio->description, 80) }}</p>
-                            @if($portfolio->project_url)
-                                <a href="{{ $portfolio->project_url }}" target="_blank" class="neo-btn" style="padding: 6px 16px; font-size: 0.8rem; box-shadow: 3px 3px 0 var(--black);">Lihat Proyek</a>
-                            @endif
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info text-start">
+                                    <span class="portfolio-category">{{ $portfolio->client ?? 'Project' }}</span>
+                                    <h4 class="portfolio-title">{{ $portfolio->title }}</h4>
+                                    <a href="{{ $portfolio->project_url ?? '#' }}" class="portfolio-btn text-start">
+                                        View Detail <i class="bi bi-arrow-right-short"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             @empty
-                <div class="col-12 text-center">
-                    <p>Belum ada portfolio.</p>
-                </div>
+                <div class="col-12 text-center"><p>Belum ada portfolio.</p></div>
             @endforelse
-        </div>
-        
-        <div class="text-center mt-5">
-            <a href="#" class="neo-btn neo-btn-outline">
-                <i class="bi bi-box-arrow-up-right me-2"></i> Lihat Semua Proyek
-            </a>
         </div>
     </div>
 </section>

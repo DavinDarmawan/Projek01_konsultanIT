@@ -6,33 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
-{
-    Schema::create('contacts', function (Blueprint $table) {
+    {
+        Schema::create('contacts', function (Blueprint $table) {
 
-        $table->id();
+            $table->id();
 
-        $table->string('name');
+            $table->string('name');
 
-        $table->string('email');
+            $table->string('email');
 
-        $table->string('phone')->nullable();
+            $table->string('phone')->nullable();
 
-        $table->string('subject')->nullable();
+            $table->string('subject')->nullable();
 
-        $table->text('message');
+            $table->text('message');
 
-        $table->enum('status', [
-            'unread',
-            'read'
-        ])->default('unread');
+            $table->enum('status', [
+                'unread',
+                'read',
+            ])->default('unread');
 
-        $table->timestamps();
-    });
-}
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.

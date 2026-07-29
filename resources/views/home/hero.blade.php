@@ -1,54 +1,129 @@
 @php
     $heroImage = isset($hero->image) && $hero->image ? asset('storage/' . $hero->image) : null;
+    $defaultBg = 'linear-gradient(135deg, #f0f7f4 0%, #e6f0ed 100%)';
 @endphp
 
-<section class="neo-section" style="padding-top: 40px; background: white; border-bottom: 4px solid var(--black);">
+<section id="hero" class="hero-section" >
     <div class="container">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <div class="neo-badge mb-3">
-                    <i class="bi bi-stars me-1"></i> IT Consultant Terpercaya
+        <div class="row align-items-center">
+            <!-- Text Content -->
+            <div class="col-lg-6 text-start fade-in-up-ready">
+                <div class="hero-badge">
+                    <i class="bi bi-shield-check"></i> Mitra Transformasi Digital Terpercaya
                 </div>
-                <h1 class="neo-title">
-                    {{ $hero->title ?? 'Solusi TI Profesional & Handal' }}
+                <h1 class="hero-title">
+                    {{ $hero->title ?? 'Solusi IT Premium untuk Bisnis & Instansi' }}
+                    <span>{{ $hero->subtitle ?? 'Anda' }}</span>
                 </h1>
-                <p class="neo-subtitle mt-3" style="font-size: 1.2rem;">
-                    {{ $hero->subtitle ?? 'Icommits hadir sejak 2015 sebagai mitra strategis dalam mewujudkan transformasi digital.' }}
+                <p class="hero-subtitle">
+                    {{ $hero->desc ?? 'Icommits membantu Perusahaan, UMKM, Startup, Sekolah, dan Instansi Pemerintah membangun infrastruktur teknologi modern untuk akselerasi pertumbuhan di era digital.' }}
                 </p>
-                <div class="mt-4 d-flex flex-wrap gap-3">
-                    <a href="{{ $hero->button_link ?? '#layanan' }}" class="neo-btn">
-                        <i class="bi bi-rocket-takeoff me-2"></i> {{ $hero->button_text ?? 'Layanan Kami' }}
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ $hero->button_link ?? '#kontak' }}" class="btn btn-custom btn-custom-primary">
+                        {{ $hero->button_text ?? 'Hubungi Kami' }} <i class="bi bi-chat-dots-fill"></i>
                     </a>
-                    <a href="#portfolio" class="neo-btn neo-btn-outline">
-                        <i class="bi bi-grid-3x3-gap me-2"></i> Lihat Portfolio
+                    <a href="#layanan" class="btn btn-custom btn-custom-secondary">
+                        Lihat Layanan <i class="bi bi-grid-fill"></i>
                     </a>
                 </div>
-                <div class="mt-4 d-flex gap-4">
-                    <div>
-                        <span class="fw-bold fs-4" style="color: var(--green);">2015</span>
-                        <p class="mb-0" style="font-size: 0.85rem;">Tahun Berdiri</p>
+
+                <!-- Stats Grid -->
+                <div class="row hero-stats-wrapper g-4 mt-4">
+                    <div class="col-6 col-sm-3">
+                        <div class="stat-item text-start">
+                            <h3>50<span>+</span></h3>
+                            <p>Project Selesai</p>
+                        </div>
                     </div>
-                    <div>
-                        <span class="fw-bold fs-4" style="color: var(--green);">10+</span>
-                        <p class="mb-0" style="font-size: 0.85rem;">Programmer</p>
+                    <div class="col-6 col-sm-3">
+                        <div class="stat-item text-start">
+                            <h3>20<span>+</span></h3>
+                            <p>Partner Bisnis</p>
+                        </div>
                     </div>
-                    <div>
-                        <span class="fw-bold fs-4" style="color: var(--green);">50+</span>
-                        <p class="mb-0" style="font-size: 0.85rem;">Proyek Selesai</p>
+                    <div class="col-6 col-sm-3">
+                        <div class="stat-item text-start">
+                            <h3>8<span>+</span></h3>
+                            <p>Tahun Pengalaman</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-3">
+                        <div class="stat-item text-start">
+                            <h3>98<span>%</span></h3>
+                            <p>Kepuasan Klien</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="position-relative">
-                    @if($heroImage)
-                        <img src="{{ $heroImage }}" alt="{{ $hero->title ?? 'Hero' }}" class="img-neo" style="height: 380px; object-fit: cover;">
-                    @else
-                        <div class="img-neo" style="background: var(--gray); height: 380px; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: var(--black);">
-                            <i class="bi bi-laptop"></i>
+
+            <!-- Mockup Graphic -->
+            <div class="col-lg-6 fade-in-up-ready delay-2 mt-5 mt-lg-0">
+                <div class="mockup-container">
+                    <div class="mockup-shadow"></div>
+                    <div class="dashboard-mockup">
+                        <div class="mockup-header">
+                            <div class="mockup-dots">
+                                <span class="mockup-dot red"></span>
+                                <span class="mockup-dot yellow"></span>
+                                <span class="mockup-dot green"></span>
+                            </div>
+                            <div class="mockup-search"></div>
+                            <div><i class="bi bi-gear-fill text-muted"></i></div>
                         </div>
-                    @endif
-                    <div class="position-absolute" style="bottom: -16px; right: -16px; background: var(--yellow); padding: 12px 20px; border: 3px solid var(--black); font-weight: 700;">
-                        <i class="bi bi-check-circle-fill me-1" style="color: var(--green);"></i> 100% Komitmen
+                        <div class="mockup-body">
+                            <div class="row align-items-center mb-4">
+                                <div class="col-8">
+                                    <h5 class="mb-1 text-dark fs-6 fw-bold">Analisis Sistem Perusahaan</h5>
+                                    <span class="text-muted d-block" style="font-size: 0.8rem;">Integrasi ERP & Software Development</span>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 fs-7">Selesai</span>
+                                </div>
+                            </div>
+                            <div class="mockup-chart-container">
+                                <div class="mockup-bar" style="height: 60%;"></div>
+                                <div class="mockup-bar active" style="height: 85%;"></div>
+                                <div class="mockup-bar" style="height: 45%;"></div>
+                                <div class="mockup-bar" style="height: 70%;"></div>
+                                <div class="mockup-bar" style="height: 90%;"></div>
+                                <div class="mockup-bar" style="height: 55%;"></div>
+                                <div class="mockup-bar" style="height: 75%;"></div>
+                            </div>
+                            <div class="row mt-4 pt-2 border-top g-3">
+                                <div class="col-6">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem;">Server Uptime</span>
+                                    <strong class="text-dark">99.98%</strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <span class="text-muted d-block mb-1" style="font-size: 0.75rem;">Optimasi Cloud</span>
+                                    <strong class="text-success"><i class="bi bi-caret-up-fill"></i> +24%</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating cards -->
+                    <div class="mockup-card-small float-card-1">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-wrapper icon-wrapper-green m-0" style="width:40px; height:40px; font-size:1.1rem;">
+                                <i class="bi bi-graph-up-arrow"></i>
+                            </div>
+                            <div>
+                                <span class="text-muted d-block" style="font-size: 0.7rem;">Digital Growth</span>
+                                <strong class="text-dark" style="font-size: 0.9rem;">+45.8%</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mockup-card-small float-card-2">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="icon-wrapper icon-wrapper-blue m-0" style="width:40px; height:40px; font-size:1.1rem;">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div>
+                                <span class="text-muted d-block" style="font-size: 0.7rem;">Klien Baru</span>
+                                <strong class="text-dark" style="font-size: 0.9rem;">200+ Aktif</strong>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,64 +1,31 @@
-<section class="neo-section" id="keunggulan" style="background: var(--cream);">
+<section id="keunggulan" class="bg-light-section py-5">
     <div class="container">
-        <div class="text-center mb-5">
-            <div class="neo-badge mb-2">Keunggulan</div>
-            <h2 class="neo-title" style="font-size: 2.5rem;">
-                Kenapa Memilih <span style="color: var(--blue);">Icommits</span>?
-            </h2>
+        <div class="row section-header text-center justify-content-center fade-in-up-ready">
+            <div class="col-lg-7">
+                <span class="section-tagline">Keunggulan</span>
+                <h2 class="section-title mb-3">Mengapa Memilih Icommits?</h2>
+                <p class="section-desc">
+                    Kombinasi pengalaman, standar keamanan tinggi, dan kepatuhan regulasi menjamin kelancaran sistem IT Anda.
+                </p>
+            </div>
         </div>
-        
+
         <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
-                <div class="neo-card text-center h-100" style="background: white;">
-                    <div style="font-size: 3rem; color: var(--green);">
-                        <i class="bi bi-shield-check"></i>
+            @forelse($benefits as $key => $benefit)
+                <div class="col-md-6 col-lg-3 fade-in-up-ready delay-{{ ($key % 3) }}">
+                    <div class="feature-card text-center text-sm-start">
+                        <div class="feature-icon">
+                            <i class="bi {{ $benefit->icon ?? 'bi-check-circle' }}"></i>
+                        </div>
+                        <h4>{{ $benefit->title }}</h4>
+                        <p class="text-muted">{{ $benefit->description }}</p>
                     </div>
-                    <h5 class="fw-bold mt-2">Aman & Handal</h5>
-                    <p style="font-size: 0.95rem; color: #555;">
-                        Menggunakan teknologi yang <strong>secure</strong> dan 
-                        <strong>reliabel</strong> untuk setiap solusi yang diberikan.
-                    </p>
                 </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3">
-                <div class="neo-card text-center h-100" style="background: white;">
-                    <div style="font-size: 3rem; color: var(--yellow);">
-                       <i class="bi bi-hand-thumbs-up"></i>
-                    </div>
-                    <h5 class="fw-bold mt-2">Kemitraan Strategis</h5>
-                    <p style="font-size: 0.95rem; color: #555;">
-                        Bersinergi dengan klien dan partner dengan prinsip 
-                        <strong>saling menguntungkan</strong>.
-                    </p>
+            @empty
+                <div class="col-12 text-center">
+                    <p class="text-muted">Belum ada data benefit. Silakan tambahkan melalui admin panel.</p>
                 </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3">
-                <div class="neo-card text-center h-100" style="background: white;">
-                    <div style="font-size: 3rem; color: var(--blue);">
-                        <i class="bi bi-clock-history"></i>
-                    </div>
-                    <h5 class="fw-bold mt-2">Cepat & Tepat</h5>
-                    <p style="font-size: 0.95rem; color: #555;">
-                        Jaminan pekerjaan <strong>berkualitas, cepat, tepat</strong>, 
-                        dengan harga yang kompetitif.
-                    </p>
-                </div>
-            </div>
-            
-            <div class="col-md-6 col-lg-3">
-                <div class="neo-card text-center h-100" style="background: white;">
-                    <div style="font-size: 3rem; color: #e65100;">
-                        <i class="bi bi-trophy"></i>
-                    </div>
-                    <h5 class="fw-bold mt-2">Produk Lokal Bersaing</h5>
-                    <p style="font-size: 0.95rem; color: #555;">
-                        Menghasilkan produk teknologi informasi dalam negeri 
-                        yang <strong>mampu bersaing</strong> global.
-                    </p>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
