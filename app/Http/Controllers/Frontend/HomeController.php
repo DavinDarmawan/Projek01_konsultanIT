@@ -10,6 +10,8 @@ use App\Models\HeroSection;
 use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\Technology;
+use App\Models\Team;
+use App\Models\Partner;
 
 class HomeController extends Controller
 {
@@ -29,7 +31,9 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('pages.about');
+        $teams = Team::all();
+        $partner = Partner::all();
+        return view('pages.about', compact('teams', 'partner'));
     }
 
     public function contact()

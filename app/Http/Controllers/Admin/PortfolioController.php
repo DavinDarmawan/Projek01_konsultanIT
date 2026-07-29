@@ -60,7 +60,7 @@ class PortfolioController extends Controller
             'description' => 'required|string',
             'client'      => 'nullable|string|max:255',
             'project_url' => 'nullable|url',
-            'image'       => 'nullable|image|max:2048',
+            'image'       => 'nullable|image|max:4096', // Maksimal 4MB
         ]);
 
         $portfolio = Portfolio::findOrFail($id);

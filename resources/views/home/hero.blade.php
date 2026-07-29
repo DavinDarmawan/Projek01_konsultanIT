@@ -3,7 +3,7 @@
     $defaultBg = 'linear-gradient(135deg, #f0f7f4 0%, #e6f0ed 100%)';
 @endphp
 
-<section id="hero" class="hero-section" >
+<section id="hero" class="hero-section" style="background: {{ $heroImage ? 'url(' . $heroImage . ') center/cover no-repeat' : $defaultBg }};">
     <div class="container">
         <div class="row align-items-center">
             <!-- Text Content -->
@@ -56,7 +56,7 @@
                 </div>
             </div>
 
-            <!-- Mockup Graphic -->
+            {{-- <!-- Mockup Graphic -->
             <div class="col-lg-6 fade-in-up-ready delay-2 mt-5 mt-lg-0">
                 <div class="mockup-container">
                     <div class="mockup-shadow"></div>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

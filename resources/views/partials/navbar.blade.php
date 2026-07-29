@@ -27,7 +27,7 @@
                         <a class="nav-link nav-link-custom" href="#portfolio">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="#kontak">Contact</a>
+                        <a class="nav-link nav-link-custom" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
 
