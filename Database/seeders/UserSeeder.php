@@ -10,11 +10,15 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@icommits.id',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin'
-        ]);
+        User::firstOrCreate(
+    [
+        'email' => 'admin@icommits.id'
+    ],
+    [
+        'name' => 'Administrator',
+        'password' => Hash::make('admin123'),
+        'role' => 'admin'
+    ]
+);
     }
 }

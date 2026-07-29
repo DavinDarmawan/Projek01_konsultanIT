@@ -29,4 +29,10 @@ public function technologies()
 {
     return $this->hasMany(Technology::class);
 }
+
+public function articles()
+{
+    return $this->hasMany(ServiceArticle::class);
+}
+
 }
