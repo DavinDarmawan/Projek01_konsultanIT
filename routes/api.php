@@ -20,8 +20,9 @@ use App\Http\Controllers\Api\PartnerController;
 | API Routes
 |--------------------------------------------------------------------------
 */
+use App\Http\Controllers\Api\ServiceArticleController;
 
-// User Auth Check
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -50,6 +51,14 @@ Route::get('/teams/{id}', [TeamController::class, 'showPublic']);
 
 Route::get('/partners', [PartnerController::class, 'indexPublic']);
 
+Route::get('/service-articles', [ServiceArticleController::class, 'indexPublic']);
+Route::get('/service-articles/{slug}', [ServiceArticleController::class, 'showPublic']);
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
 
 // ==========================================
 // ROUTE ADMIN (Proteksi Sanctum)
@@ -66,7 +75,10 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     // Admin kontak (tanpa fungsi store)
     Route::apiResource('contacts', ContactController::class)->except(['store']);
 
-    // Admin Company Info (hanya index, show, dan update)
-    Route::apiResource('company', CompanyInfoController::class)->only(['index', 'show', 'update']);
+Route::apiResource(
+    'admin/service-articles',
+    ServiceArticleController::class
+);
+
 
 });

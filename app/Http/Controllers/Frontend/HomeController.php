@@ -13,6 +13,7 @@ use App\Models\Technology;
 use Illuminate\Support\Facades\Http;
 use App\Services\TeamService;
 use App\Services\PartnerService;
+use App\Models\ServiceArticle;
 
 class HomeController extends Controller
 {
@@ -52,5 +53,39 @@ class HomeController extends Controller
         $contact = CompanyInfo::first();
 
         return view('pages.contact', compact('contact'));
+    }
+public function servicearticle($slug)
+    {
+        $article = ServiceArticle::where('slug', $slug)
+            ->where('status', 'published')
+            ->first();
+
+        if (!$article) {
+            $service = Service::where('slug', $slug)
+                ->where('status', 'active')
+                ->first();
+
+            if ($service) {
+                $article = $service->articles()
+                    ->where('status', 'published')
+                    ->latest()
+                    ->first();
+            }
+        }
+
+        if (!$article) {
+            abort(404);
+        }
+
+        $service = $article->service;
+
+        $relatedArticles = ServiceArticle::where('service_id', $service->id)
+            ->where('id', '!=', $article->id)
+            ->where('status', 'published')
+            ->latest()
+            ->limit(3)
+            ->get();
+
+        return view('pages.service-article', compact('article', 'service', 'relatedArticles'));
     }
 }

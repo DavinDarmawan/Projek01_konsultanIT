@@ -1,6 +1,8 @@
 <div class="admin-sidebar">
     <div class="brand">
-        <i class="bi bi-code-square me-2" style="color: var(--green);"></i>
+                    <a class="navbar-brand navbar-brand-custom" href="/">
+                <img src="{{ asset('storage/logo/icommits.png') }}" alt="Icommits Logo" height="42">
+            </a>
         Icommits<span>.</span>
     </div>
     <ul class="nav flex-column">

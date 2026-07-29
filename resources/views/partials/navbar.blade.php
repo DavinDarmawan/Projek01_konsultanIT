@@ -15,13 +15,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom active" href="/">Home</a>
+                        <a class="nav-link nav-link-custom @yield('home')" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="/about">About</a>
+                        <a class="nav-link nav-link-custom @yield('about')" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="{{ route('contact') }}">Contact</a>
+                        <a class="nav-link nav-link-custom @yield('contact')" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>
 

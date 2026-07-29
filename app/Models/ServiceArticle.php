@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceArticle extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'service_id',
         'title',
@@ -15,12 +17,11 @@ class ServiceArticle extends Model
         'featured_image',
         'meta_title',
         'meta_description',
-        'status'
+        'status',
     ];
 
     public function service()
     {
         return $this->belongsTo(Service::class);
     }
-
 }

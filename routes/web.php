@@ -11,11 +11,12 @@ use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\CtaController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CompanyInfoController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
+Route::get('/service-article/{slug}', [HomeController::class, 'servicearticle'])->name('service.article');
 // Login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -35,7 +36,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::put('cta/{id}', [CtaController::class, 'update'])->name('cta.update');
     // Contact tidak perlu CRUD karena data kontak hardcoded, bisa dibuat nanti
 });
-use App\Http\Controllers\Admin\CompanyInfoController;
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     // ...

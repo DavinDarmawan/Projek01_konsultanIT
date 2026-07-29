@@ -28,6 +28,10 @@
                     $isGreen = in_array($service->slug, $greenSlugs);
                     $wrapperClass = $isGreen ? 'icon-wrapper-green' : 'icon-wrapper-blue';
                 @endphp
+                @php
+                    $article = $service->articles()->where('status', 'published')->latest()->first();
+                    $articleSlug = $article ? $article->slug : null;
+                @endphp
                 <div class="col-lg-4 col-md-6 fade-in-up-ready delay-{{ ($key % 3) }}">
                     <div class="service-card">
                         <div class="icon-wrapper {{ $wrapperClass }}">
@@ -35,9 +39,15 @@
                         </div>
                         <h4>{{ $service->title }}</h4>
                         <p>{{ $service->description }}</p>
-                        {{-- <a href="{{ route('service.detail', $service->slug) ?? '#' }}" class="service-link">
-                            Learn More <i class="bi bi-chevron-right"></i>
-                        </a> --}}
+                        @if($articleSlug)
+                            <a href="{{ route('service.article', $articleSlug) }}" class="service-link">
+                                Learn More <i class="bi bi-chevron-right"></i>
+                            </a>
+                        @else
+                            <span class="service-link text-muted">
+                                Belum ada artikel <i class="bi bi-info-circle"></i>
+                            </span>
+                        @endif
                     </div>
                 </div>
             @empty
