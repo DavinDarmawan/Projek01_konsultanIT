@@ -9,5 +9,14 @@ class Benefit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['icon', 'title', 'description'];
+    protected $fillable = [
+        'service_id',
+        'title',
+        'description'
+    ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

@@ -20,8 +20,13 @@ class Service extends Model
         'created_by'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
+    public function benefits()
+{
+    return $this->hasMany(Benefit::class);
+}
+
+public function technologies()
+{
+    return $this->hasMany(Technology::class);
+}
 }

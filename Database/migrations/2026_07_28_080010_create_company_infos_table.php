@@ -9,15 +9,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('company_infos', function (Blueprint $table) {
-            $table->id();
-            $table->text('address')->nullable();
-            $table->string('email', 100)->nullable();
-            $table->string('phone', 20)->nullable();
-            $table->string('whatsapp', 20)->nullable();
-            $table->text('map_embed')->nullable();
-            $table->json('social_media')->nullable(); // simpan array sosial media
-            $table->timestamps();
-        });
+
+    $table->id();
+
+    $table->string('company_name');
+
+    $table->text('about');
+
+    $table->text('vision');
+
+    $table->longText('mission');
+
+    $table->string('logo')->nullable();
+
+    $table->timestamps();
+});
     }
 
     public function down()
