@@ -26,9 +26,7 @@ class BenefitController extends Controller
 
     public function store(Request $request)
     {
-        return Benefit::create(
-            $request->all()
-        );
+        return Benefit::create($request->all());
     }
 
     public function show(Benefit $benefit)
@@ -38,9 +36,7 @@ class BenefitController extends Controller
 
     public function update(Request $request, Benefit $benefit)
     {
-        $benefit->update(
-            $request->all()
-        );
+        $benefit->update($request->all());
 
         return $benefit;
     }
