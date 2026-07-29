@@ -14,8 +14,13 @@ class DatabaseSeeder extends Seeder
     ServiceSeeder::class,
     PortfolioSeeder::class,
     BenefitSeeder::class,
+    CompanyInfoSeeder::class,
     TeamSeeder::class,
     PartnerSeeder::class,
+    ServiceArticleSeeder::class,
+    TestimonialSeeder::class,
+    ClientSeeder::class,
+    FaqSeeder::class,
 ]);
     }
 }
