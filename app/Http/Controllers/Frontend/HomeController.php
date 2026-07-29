@@ -10,8 +10,7 @@ use App\Models\HeroSection;
 use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\Technology;
-use App\Models\Team;
-use App\Models\Partner;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -29,11 +28,31 @@ class HomeController extends Controller
         ));
     }
 
+
     public function about()
     {
-        $teams = Team::all();
-        $partner = Partner::all();
-        return view('pages.about', compact('teams', 'partner'));
+        // Ambil data teams dari API
+        $teamsResponse = Http::get(url('api/teams'));
+        $team = $teamsResponse->successful() ? $teamsResponse->json('data') : [];
+        
+        // Jika data berbentuk array, konversi ke object
+        if (is_array($team) && !empty($team)) {
+            $team = collect($team)->map(function($item) {
+                return (object) $item;
+            });
+        }
+
+        // Ambil data partners dari API
+        $partnersResponse = Http::get(url('api/partners'));
+        $partners = $partnersResponse->successful() ? $partnersResponse->json('data') : [];
+        
+        if (is_array($partners) && !empty($partners)) {
+            $partners = collect($partners)->map(function($item) {
+                return (object) $item;
+            });
+        }
+
+        return view('pages.about', compact('team', 'partners'));
     }
 
     public function contact()
