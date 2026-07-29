@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\TechnologyController;
 use App\Http\Controllers\Api\CtaController;
 use App\Http\Controllers\Api\CompanyInfoController;
 use App\Http\Controllers\Api\PartnerController;
+use App\Http\Controllers\Api\ServiceArticleController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -45,6 +46,9 @@ Route::get('/cta', [CtaController::class, 'indexPublic']);
 Route::get('/company', [CompanyInfoController::class, 'indexPublic']);
 
 Route::get('/partners', [PartnerController::class, 'indexPublic']);
+
+Route::get('/service-articles', [ServiceArticleController::class, 'indexPublic']);
+Route::get('/service-articles/{slug}', [ServiceArticleController::class, 'showPublic']);
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +92,11 @@ Route::apiResource(
     'admin/company',
     CompanyInfoController::class
 )->only(['index', 'show', 'update']);
+
+Route::apiResource(
+    'admin/service-articles',
+    ServiceArticleController::class
+);
 
 
 });
