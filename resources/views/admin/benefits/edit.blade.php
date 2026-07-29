@@ -1,12 +1,19 @@
 @extends('layouts.admin')
 
-@section('title', 'Tambah Benefit')
-@section('page-title', 'Tambah Benefit')
+@section('title', 'Edit Benefit')
+@section('page-title', 'Edit Benefit')
 
 @section('content')
     <div class="neo-card">
-        <form action="{{ route('admin.benefits.store') }}" method="POST">
+        <form action="{{ route('admin.benefits.update', $benefit->id) }}" method="POST">
             @csrf
+            @method('PUT')
+
+            @if(session('success'))
+                <div class="alert alert-success border-3 border-black rounded-0">
+                    <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
+                </div>
+            @endif
 
             @if($errors->any())
                 <div class="alert alert-danger border-3 border-black rounded-0">
@@ -25,12 +32,12 @@
                 <div class="row g-2">
                     <div class="col-md-6">
                         <input type="text" name="icon" id="icon" class="form-control border-3 border-black rounded-0 @error('icon') is-invalid @enderror" 
-                               placeholder="Contoh: bi-shield-check" value="{{ old('icon') }}" required>
+                               placeholder="Contoh: bi-shield-check" value="{{ old('icon', $benefit->icon) }}" required>
                         <small class="text-muted">Masukkan class Bootstrap Icon (contoh: bi-shield-check, bi-handshake, bi-star, dll)</small>
                     </div>
                     <div class="col-md-3">
                         <div class="border-3 border-black p-3 text-center bg-white" style="height: 100%; display: flex; align-items: center; justify-content: center;">
-                            <i class="bi {{ old('icon', 'bi-question-circle') }}" id="iconPreview" style="font-size: 2rem; color: var(--black);"></i>
+                            <i class="bi {{ old('icon', $benefit->icon ?? 'bi-question-circle') }}" id="iconPreview" style="font-size: 2rem; color: var(--black);"></i>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -56,7 +63,7 @@
                     <i class="bi bi-tag me-1"></i> Title
                 </label>
                 <input type="text" name="title" class="form-control border-3 border-black rounded-0 @error('title') is-invalid @enderror" 
-                       placeholder="Masukkan judul benefit" value="{{ old('title') }}" required>
+                       placeholder="Masukkan judul benefit" value="{{ old('title', $benefit->title) }}" required>
                 @error('title')
                     <div class="text-danger mt-1 fw-bold">{{ $message }}</div>
                 @enderror
@@ -68,7 +75,7 @@
                     <i class="bi bi-text-paragraph me-1"></i> Description
                 </label>
                 <textarea name="description" class="form-control border-3 border-black rounded-0 @error('description') is-invalid @enderror" 
-                          rows="4" placeholder="Masukkan deskripsi benefit" required>{{ old('description') }}</textarea>
+                          rows="4" placeholder="Masukkan deskripsi benefit" required>{{ old('description', $benefit->description) }}</textarea>
                 @error('description')
                     <div class="text-danger mt-1 fw-bold">{{ $message }}</div>
                 @enderror
@@ -83,7 +90,7 @@
             {{-- Buttons --}}
             <div class="d-flex gap-3 mt-4">
                 <button type="submit" class="neo-btn">
-                    <i class="bi bi-check-lg me-2"></i> Simpan
+                    <i class="bi bi-check-lg me-2"></i> Update
                 </button>
                 <a href="{{ route('admin.benefits.index') }}" class="neo-btn neo-btn-outline">
                     <i class="bi bi-x-lg me-2"></i> Batal
@@ -98,6 +105,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const iconInput = document.getElementById('icon');
             const iconPreview = document.getElementById('iconPreview');
+
+            // Preview awal
+            if (iconInput.value) {
+                iconPreview.className = 'bi ' + iconInput.value;
+            }
 
             iconInput.addEventListener('input', function() {
                 const value = this.value.trim();

@@ -18,56 +18,21 @@
                 </p>
             </div>
         </div>
-
-        <div class="row mt-4 g-4 justify-content-center">
-            <!-- Partner 1: Pertamina -->
-            <div class="col-6 col-md-3 fade-in-up-ready">
-                <div class="partner-card partner-card-green">
-                    <div class="partner-icon">
-                        <i class="bi bi-fuel-pump"></i>
-                    </div>
-                    <h6 class="partner-name">Pertamina</h6>
-                    <p class="partner-project">Starsite Project</p>
-                    <span class="partner-badge">Enterprise</span>
+<div class="row g-4 mt-4 justify-content-center">
+    @foreach ($partners as $partner)
+        <div class="col-6 col-md-3 fade-in-up-ready delay-{{ ($loop->index % 3) + 1 }}">
+            <div class="partner-card partner-card-{{ $loop->index % 4 == 0 ? 'green' : ($loop->index % 4 == 1 ? 'blue' : ($loop->index % 4 == 2 ? 'orange' : 'accent')) }}">
+                <div class="partner-icon">
+                    <i class="bi {{ $partner->icon ?? 'bi-building' }}"></i>
                 </div>
-            </div>
-
-            <!-- Partner 2: BPBD Bandung -->
-            <div class="col-6 col-md-3 fade-in-up-ready delay-1">
-                <div class="partner-card partner-card-blue">
-                    <div class="partner-icon">
-                        <i class="bi bi-buildings"></i>
-                    </div>
-                    <h6 class="partner-name">BPBD Bandung</h6>
-                    <p class="partner-project">E-Dala Sistem</p>
-                    <span class="partner-badge">Pemerintah</span>
-                </div>
-            </div>
-
-            <!-- Partner 3: Pemda Sumedang -->
-            <div class="col-6 col-md-3 fade-in-up-ready delay-2">
-                <div class="partner-card partner-card-orange">
-                    <div class="partner-icon">
-                        <i class="bi bi-houses"></i>
-                    </div>
-                    <h6 class="partner-name">Pemda Sumedang</h6>
-                    <p class="partner-project">SIPANGKAS</p>
-                    <span class="partner-badge">Pemerintah</span>
-                </div>
-            </div>
-
-            <!-- Partner 4: PT Retail Modern -->
-            <div class="col-6 col-md-3 fade-in-up-ready delay-3">
-                <div class="partner-card partner-card-accent">
-                    <div class="partner-icon">
-                        <i class="bi bi-shop"></i>
-                    </div>
-                    <h6 class="partner-name">PT Retail Modern</h6>
-                    <p class="partner-project">ERP & POS</p>
-                    <span class="partner-badge">Bisnis</span>
-                </div>
+                <h6 class="partner-name">{{ $partner->company_name ?? $partner->name ?? 'Partner' }}</h6>
+                <p class="partner-project">{{ $partner->project_name ?? $partner->project ?? '' }}</p>
+                <span class="partner-badge">{{ $partner->category ?? 'Mitra' }}</span>
             </div>
         </div>
+    @endforeach
+</div>
+
 
         <!-- CTA Mini -->
         <div class="text-center mt-5 fade-in-up-ready">

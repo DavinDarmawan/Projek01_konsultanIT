@@ -10,7 +10,17 @@ class CompanyInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'address', 'email', 'phone', 'whatsapp', 'map_embed', 'social_media'
+        'company_name',
+        'about',
+        'vision',
+        'mission',
+        'logo',
+        'address',
+        'email',
+        'phone',
+        'whatsapp',
+        'map_embed',
+        'social_media',
     ];
 
     protected $casts = [

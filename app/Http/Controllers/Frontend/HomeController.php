@@ -11,9 +11,19 @@ use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\Technology;
 use Illuminate\Support\Facades\Http;
+use App\Services\TeamService;
+use App\Services\PartnerService;
 
 class HomeController extends Controller
 {
+        protected $teamService;
+    protected $partnerService;
+
+    public function __construct(TeamService $teamService, PartnerService $partnerService)
+    {
+        $this->teamService = $teamService;
+        $this->partnerService = $partnerService;
+    }
     public function index()
     {
         $hero = HeroSection::first();
@@ -31,27 +41,9 @@ class HomeController extends Controller
 
     public function about()
     {
-        // Ambil data teams dari API
-        $teamsResponse = Http::get(url('api/teams'));
-        $team = $teamsResponse->successful() ? $teamsResponse->json('data') : [];
+       $team = $this->teamService->getPublic();
+        $partners = $this->partnerService->getPublic();
         
-        // Jika data berbentuk array, konversi ke object
-        if (is_array($team) && !empty($team)) {
-            $team = collect($team)->map(function($item) {
-                return (object) $item;
-            });
-        }
-
-        // Ambil data partners dari API
-        $partnersResponse = Http::get(url('api/partners'));
-        $partners = $partnersResponse->successful() ? $partnersResponse->json('data') : [];
-        
-        if (is_array($partners) && !empty($partners)) {
-            $partners = collect($partners)->map(function($item) {
-                return (object) $item;
-            });
-        }
-
         return view('pages.about', compact('team', 'partners'));
     }
 
