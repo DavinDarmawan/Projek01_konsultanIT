@@ -21,12 +21,6 @@
                         <a class="nav-link nav-link-custom" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="#layanan">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-custom" href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link nav-link-custom" href="{{ route('contact') }}">Contact</a>
                     </li>
                 </ul>

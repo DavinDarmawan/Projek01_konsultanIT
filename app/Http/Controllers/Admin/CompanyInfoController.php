@@ -8,19 +8,20 @@ use App\Models\CompanyInfo;
 
 class CompanyInfoController extends Controller
 {
-    public function edit($id)
+ public function edit($id)
     {
         $company = CompanyInfo::findOrFail($id);
-
+        
+        // Default social media jika kosong
         if (empty($company->social_media) || !is_array($company->social_media)) {
             $company->social_media = [
-                ['platform' => 'Instagram', 'url' => '#', 'icon' => 'bi-instagram'],
-                ['platform' => 'LinkedIn', 'url' => '#', 'icon' => 'bi-linkedin'],
-                ['platform' => 'YouTube', 'url' => '#', 'icon' => 'bi-youtube'],
-                ['platform' => 'Facebook', 'url' => '#', 'icon' => 'bi-facebook'],
+                ['platform' => 'Instagram', 'url' => '', 'icon' => 'bi-instagram'],
+                ['platform' => 'LinkedIn', 'url' => '', 'icon' => 'bi-linkedin'],
+                ['platform' => 'YouTube', 'url' => '', 'icon' => 'bi-youtube'],
+                ['platform' => 'Facebook', 'url' => '', 'icon' => 'bi-facebook'],
             ];
         }
-
+        
         return view('admin.company.edit', compact('company'));
     }
 
