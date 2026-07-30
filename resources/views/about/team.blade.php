@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4 mt-4 justify-content-center">
             @forelse($team as $key => $tim)
                 @php
                     // Cek apakah $tim object atau array
@@ -107,7 +107,7 @@
 <style>
     /* ===== SECTION ===== */
     .team-section {
-        padding: 80px 0;
+        padding: 40px 0;
         background: #f8f9fa;
     }
 
