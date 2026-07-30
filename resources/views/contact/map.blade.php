@@ -20,7 +20,7 @@
         </div>
 
         <!-- Map Container -->
-        <div class="map-wrapper fade-in-up-ready delay-1">
+        <div class="map-wrapper fade-in-up-ready mt-4 delay-1">
             <div class="map-container">
                 <iframe 
                     src="{{ $contact->map_embed ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.123456!2d107.612345!3d-6.912345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTQnNDQuMyJTIDEwN8KwMzYnNDQuMyJF!5e0!3m2!1sid!2sid!4v1234567890' }}" 

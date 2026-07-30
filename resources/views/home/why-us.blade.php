@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 mt-4">
             @forelse($benefits as $key => $benefit)
                 <div class="col-md-6 col-lg-3 fade-in-up-ready delay-{{ ($key % 3) }}">
                     <div class="feature-card text-center text-sm-start">
