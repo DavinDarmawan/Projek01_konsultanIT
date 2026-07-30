@@ -19,7 +19,9 @@ class ServiceArticleSeeder extends Seeder
                 'featured_image' => 'services/software-development.jpg',
                 'meta_title' => 'Software Development Services',
                 'meta_description' => 'Layanan pengembangan software dan aplikasi profesional.',
-                'status' => 'published'
+                'status' => 'published',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
 
             [
@@ -30,7 +32,9 @@ class ServiceArticleSeeder extends Seeder
                 'featured_image' => 'services/cms.jpg',
                 'meta_title' => 'Website CMS Services',
                 'meta_description' => 'Website CMS modern dan mudah dikelola.',
-                'status' => 'published'
+                'status' => 'published',
+                                'created_at' => now(),
+                'updated_at' => now(),
             ],
 
             [
@@ -41,7 +45,9 @@ class ServiceArticleSeeder extends Seeder
                 'featured_image' => 'services/e-raport.jpg',
                 'meta_title' => 'E-Raport Sekolah',
                 'meta_description' => 'Sistem rapor digital sekolah.',
-                'status' => 'published'
+                'status' => 'published',
+                                'created_at' => now(),
+                'updated_at' => now(),
             ]
 
         ]);

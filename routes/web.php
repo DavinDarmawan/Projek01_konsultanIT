@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\CtaController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CompanyInfoController;
+use App\Http\Controllers\Admin\ServiceArticleController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\PartnerController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -34,6 +37,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('technologies', TechnologyController::class);
     Route::get('cta/{id}/edit', [CtaController::class, 'edit'])->name('cta.edit');
     Route::put('cta/{id}', [CtaController::class, 'update'])->name('cta.update');
+    Route::resource('service-articles', ServiceArticleController::class);    
+    Route::resource('teams', TeamController::class);
+    Route::resource('partners', PartnerController::class);
     // Contact tidak perlu CRUD karena data kontak hardcoded, bisa dibuat nanti
 });
 

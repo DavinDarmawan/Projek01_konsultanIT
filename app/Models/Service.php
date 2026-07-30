@@ -10,15 +10,13 @@ class Service extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'slug',
-        'description',
-        'benefits',
-        'technologies',
-        'image',
-        'status',
-        'created_by'
-    ];
+    'title',
+    'description',
+    'technologies',
+    'icon',
+    'status',
+    'created_by'
+];
 
     public function benefits()
 {

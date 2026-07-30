@@ -10,10 +10,11 @@ class Benefit extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service_id',
-        'title',
-        'description'
-    ];
+    'service_id',
+    'title',
+    'icon',
+    'description'
+];
 
     public function service()
     {

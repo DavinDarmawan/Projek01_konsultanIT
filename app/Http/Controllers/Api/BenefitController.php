@@ -26,7 +26,24 @@ class BenefitController extends Controller
 
     public function store(Request $request)
     {
-        return Benefit::create($request->all());
+        $request->validate([
+            'service_id' => 'required|exists:services,id',
+            'title' => 'required|string|max:255',
+            'icon' => 'nullable|string|max:100',
+            'description' => 'nullable|string',
+        ]);
+
+        $benefit = Benefit::create([
+            'service_id' => $request->service_id,
+            'title' => $request->title,
+            'icon' => $request->icon,
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'message' => 'Benefit berhasil ditambahkan',
+            'data' => $benefit
+        ], 201);
     }
 
     public function show(Benefit $benefit)
@@ -36,9 +53,24 @@ class BenefitController extends Controller
 
     public function update(Request $request, Benefit $benefit)
     {
-        $benefit->update($request->all());
+        $request->validate([
+            'service_id' => 'required|exists:services,id',
+            'title' => 'required|string|max:255',
+            'icon' => 'nullable|string|max:100',
+            'description' => 'nullable|string',
+        ]);
 
-        return $benefit;
+        $benefit->update([
+            'service_id' => $request->service_id,
+            'title' => $request->title,
+            'icon' => $request->icon,
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'message' => 'Benefit berhasil diperbarui',
+            'data' => $benefit
+        ]);
     }
 
     public function destroy(Benefit $benefit)

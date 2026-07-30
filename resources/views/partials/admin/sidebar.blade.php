@@ -46,10 +46,29 @@
         <i class="bi bi-building"></i> Company Info
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('admin.service-articles*') ? 'active' : '' }}" 
+       href="{{ route('admin.service-articles.index') }}">
+        <i class="bi bi-file-text"></i> Service Articles
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('admin.teams*') ? 'active' : '' }}" 
+       href="{{ route('admin.teams.index') }}">
+        <i class="bi bi-people"></i> Teams
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('admin.partners*') ? 'active' : '' }}" 
+       href="{{ route('admin.partners.index') }}">
+        <i class="bi bi-people"></i> Partners
+    </a>
+</li>
         <li class="nav-item mt-3">
             <a class="nav-link text-danger" href="/">
                 <i class="bi bi-box-arrow-right"></i> Lihat Website
             </a>
         </li>
+        
     </ul>
 </div>
