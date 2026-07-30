@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('title', $article->meta_title ?? $article->title . ' - Icommits')
 @section('meta_description', $article->meta_description ?? strip_tags($article->content))
 
@@ -27,12 +26,32 @@
 </section>
 
 <!-- ==========================================
-     HERO ARTICLE
+     HERO ARTICLE DENGAN GAMBAR
      ========================================== -->
 <section class="article-hero-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 text-center fade-in-up-ready">
+        <div class="row align-items-center g-5">
+            <!-- Kolom Gambar -->
+            <div class="col-lg-6 fade-in-up-ready">
+                @if($article->featured_image)
+                    <div class="article-hero-image-wrapper">
+                        <img src="{{ asset('storage/' . $article->featured_image) }}" 
+                             alt="{{ $article->title }}" 
+                             class="article-hero-image">
+                        <div class="article-image-badge">
+                            <i class="bi bi-image-fill me-1"></i> Featured
+                        </div>
+                    </div>
+                @else
+                    <div class="article-hero-placeholder">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>Tidak ada gambar</span>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Kolom Konten -->
+            <div class="col-lg-6 fade-in-up-ready delay-2">
                 <!-- Badge Service -->
                 @if($service)
                     <span class="section-tagline">
@@ -40,10 +59,10 @@
                     </span>
                 @endif
 
-                <h1 class="article-hero-title">{{ $article->title }}</h1>
+                <h1 class="article-hero-title text-start">{{ $article->title }}</h1>
 
                 <!-- Meta Info -->
-                <div class="article-meta d-flex justify-content-center flex-wrap gap-3 mt-3">
+                <div class="article-meta d-flex flex-wrap gap-3 mt-3">
                     <span class="article-meta-item">
                         <i class="bi bi-calendar3"></i>
                         {{ $article->created_at->format('d M Y') }}
@@ -66,10 +85,31 @@
 
                 <!-- Deskripsi / Excerpt -->
                 @if($article->meta_description)
-                    <p class="article-hero-desc mt-4 mx-auto" style="max-width: 700px;">
+                    <p class="article-hero-desc mt-3">
                         {{ $article->meta_description }}
                     </p>
                 @endif
+
+                <!-- Tombol Share Quick -->
+                <div class="d-flex align-items-center gap-2 mt-3">
+                    <span class="text-muted small fw-semibold">Bagikan:</span>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" 
+                       target="_blank" class="share-btn-sm share-btn-facebook-sm" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($article->title) }}" 
+                       target="_blank" class="share-btn-sm share-btn-twitter-sm" title="Twitter">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(url()->current()) }}" 
+                       target="_blank" class="share-btn-sm share-btn-linkedin-sm" title="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://wa.me/?text={{ urlencode($article->title . ' - ' . url()->current()) }}" 
+                       target="_blank" class="share-btn-sm share-btn-wa-sm" title="WhatsApp">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -201,15 +241,13 @@
         background: #ffffff;
     }
     .article-hero-title {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
         font-weight: 700;
         line-height: 1.2;
         color: #1a1a1a;
-        max-width: 800px;
-        margin: 0 auto;
     }
     .article-hero-desc {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         color: #4b5563;
         line-height: 1.8;
     }
@@ -221,6 +259,88 @@
         margin-right: 4px;
         color: var(--primary);
     }
+
+    /* ===== ARTICLE IMAGE ===== */
+    .article-hero-image-wrapper {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.10);
+        background: #f1f3f5;
+        border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .article-hero-image {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .article-hero-image:hover {
+        transform: scale(1.02);
+    }
+
+    .article-image-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(26, 26, 26, 0.75);
+        backdrop-filter: blur(8px);
+        color: #ffffff;
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .article-hero-placeholder {
+        width: 100%;
+        height: 380px;
+        background: #f1f3f5;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: #d1d5db;
+        border: 3px dashed #e9ecef;
+        gap: 0.5rem;
+    }
+
+    .article-hero-placeholder span {
+        font-size: 1rem;
+        color: #9ca3af;
+        font-weight: 500;
+    }
+
+    /* ===== SHARE BUTTON SMALL ===== */
+    .share-btn-sm {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 0.8rem;
+        border: none;
+    }
+    .share-btn-sm:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        color: white;
+    }
+    .share-btn-facebook-sm { background: #1877F2; }
+    .share-btn-twitter-sm { background: #000000; }
+    .share-btn-linkedin-sm { background: #0A66C2; }
+    .share-btn-wa-sm { background: #25D366; }
 
     /* ===== ARTICLE CONTENT ===== */
     .article-content-section {
@@ -287,7 +407,7 @@
         border-color: #e9ecef;
     }
 
-    /* ===== SHARE BUTTON ===== */
+    /* ===== SHARE BUTTON LARGE ===== */
     .share-btn {
         width: 36px;
         height: 36px;
@@ -371,25 +491,52 @@
         color: #9ca3af;
     }
 
+    /* ===== BUTTON ===== */
+    .btn-primary-custom {
+        background: var(--primary);
+        color: #ffffff;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 4px 16px rgba(46,125,50,0.25);
+    }
+    .btn-primary-custom:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(46,125,50,0.35);
+        color: #ffffff;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 992px) {
         .article-hero-title { font-size: 2.2rem; }
+        .article-hero-image { height: 280px; }
+        .article-hero-placeholder { height: 280px; }
         .article-content-wrapper { padding: 1.5rem; }
         .article-body { font-size: 1rem; }
     }
     @media (max-width: 576px) {
         .article-hero-section { padding: 30px 0 20px; }
         .article-hero-title { font-size: 1.6rem; }
+        .article-hero-image { height: 200px; }
+        .article-hero-placeholder { height: 200px; font-size: 3rem; }
         .article-content-section { padding: 20px 0 40px; }
         .article-content-wrapper { padding: 1.25rem; }
         .article-body { font-size: 0.95rem; }
         .article-body h2 { font-size: 1.4rem; }
         .article-body h3 { font-size: 1.15rem; }
+        .article-image-badge { font-size: 0.65rem; padding: 4px 12px; top: 12px; left: 12px; }
         .related-card { padding: 12px 14px; }
         .related-card-icon { width: 36px; height: 36px; font-size: 1rem; }
         .related-card-title { font-size: 0.8rem; }
         .related-section { padding: 1rem; }
         .share-btn { width: 32px; height: 32px; font-size: 0.75rem; }
+        .share-btn-sm { width: 28px; height: 28px; font-size: 0.7rem; }
+        .btn-primary-custom { padding: 10px 24px; font-size: 0.9rem; }
     }
 
     /* ===== FADE IN ANIMATION ===== */
@@ -397,6 +544,9 @@
         opacity: 0;
         transform: translateY(30px);
         animation: fadeInUp 0.8s ease forwards;
+    }
+    .fade-in-up-ready.delay-2 {
+        animation-delay: 0.25s;
     }
     @keyframes fadeInUp {
         to { opacity: 1; transform: translateY(0); }

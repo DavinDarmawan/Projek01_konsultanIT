@@ -44,18 +44,20 @@ class HomeController extends Controller
     {
        $team = $this->teamService->getPublic();
         $partners = $this->partnerService->getPublic();
-        
-        return view('pages.about', compact('team', 'partners'));
+        $services = Service::where('status', 'active')->get();
+        return view('pages.about', compact('team', 'partners', 'services'));
     }
 
     public function contact()
     {
         $contact = CompanyInfo::first();
+        $services = Service::where('status', 'active')->get();
 
-        return view('pages.contact', compact('contact'));
+        return view('pages.contact', compact('contact', 'services'));
     }
 public function servicearticle($slug)
     {
+        $services = Service::where('status', 'active')->get();
         $article = ServiceArticle::where('slug', $slug)
             ->where('status', 'published')
             ->first();
@@ -86,6 +88,6 @@ public function servicearticle($slug)
             ->limit(3)
             ->get();
 
-        return view('pages.service-article', compact('article', 'service', 'relatedArticles'));
+        return view('pages.service-article', compact('article', 'service', 'relatedArticles', 'services'));
     }
 }
