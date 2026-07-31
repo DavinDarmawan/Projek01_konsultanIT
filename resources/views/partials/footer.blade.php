@@ -28,9 +28,11 @@
             <div class="col-lg-3 col-md-6 col-6">
                 <h5 class="footer-title">Layanan Kami</h5>
                 <ul class="footer-links">
-                    @foreach($services->take(7) as $service)
-                        <li><a href="{{ route('service.article', $service->slug) ?? '#' }}">{{ $service->title }}</a></li>
-                    @endforeach
+                    @isset($services)
+                        @foreach($services->take(7) as $service)
+                            <li><a href="{{ route('service.article', $service->slug) ?? '#' }}">{{ $service->title }}</a></li>
+                        @endforeach
+                    @endisset
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">

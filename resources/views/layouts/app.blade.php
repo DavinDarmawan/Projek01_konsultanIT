@@ -802,6 +802,29 @@
             document.querySelectorAll('.fade-in-up-ready').forEach(el => {
                 observer.observe(el);
             });
+
+            // Welcome Speech
+            if (!sessionStorage.getItem('welcomeSpeechPlayed')) {
+                const playWelcome = () => {
+                    if ('speechSynthesis' in window) {
+                        const msg = new SpeechSynthesisUtterance();
+                        msg.text = 'Selamat datang di ai committs.';
+                        msg.lang = 'id-ID';
+                        window.speechSynthesis.speak(msg);
+                    }
+                    sessionStorage.setItem('welcomeSpeechPlayed', 'true');
+                    
+                    // Remove listeners after playing
+                    ['click', 'scroll', 'keydown', 'mousemove', 'touchstart'].forEach(evt => {
+                        document.removeEventListener(evt, playWelcome);
+                    });
+                };
+
+                // Browsers require interaction to play audio
+                ['click', 'scroll', 'keydown', 'mousemove', 'touchstart'].forEach(evt => {
+                    document.addEventListener(evt, playWelcome, { once: true });
+                });
+            }
         });
     </script>
 
