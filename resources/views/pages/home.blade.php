@@ -6,6 +6,7 @@
     @include('home.hero')
     @include('home.about')
     @include('home.services')
+    @include('about.partners')
     @include('home.why-us')
     @include('home.technologies')
     @include('home.portfolio')

@@ -4,6 +4,12 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Models\Service;
+use App\Models\Portfolio;
+
+use App\Observers\ServiceObserver;
+use App\Observers\PortfolioObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Service::observe(ServiceObserver::class);
+        Portfolio::observe(PortfolioObserver::class);
     }
 }

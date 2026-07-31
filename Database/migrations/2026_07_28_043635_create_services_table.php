@@ -17,15 +17,15 @@ return new class extends Migration
 
         $table->string('title');
 
-        $table->string('slug')->unique();
+$table->string('slug')->unique();
 
-        $table->text('description');
+$table->text('description');
 
-        $table->text('benefits')->nullable();
+$table->text('benefits')->nullable();
 
-        $table->text('technologies')->nullable();
+$table->text('technologies')->nullable();
 
-        $table->string('image')->nullable();
+$table->string('image')->nullable();
 
         $table->enum('status', [
             'active',

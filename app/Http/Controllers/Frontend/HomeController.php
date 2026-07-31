@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Http;
 use App\Services\TeamService;
 use App\Services\PartnerService;
 use App\Models\ServiceArticle;
+use App\Models\Partner;
 
 class HomeController extends Controller
 {
@@ -29,13 +30,15 @@ class HomeController extends Controller
     {
         $hero = HeroSection::first();
         $services = Service::where('status', 'active')->get();
+        $servicearticles = ServiceArticle::where('status', 'published')->get();
         $portfolios = Portfolio::all();
         $benefits = Benefit::all();
         $technologies = Technology::all();
         $cta = Cta::first();
+        $partners = Partner::all(); // Ambil semua data partner
 
         return view('pages.home', compact(
-            'hero', 'services', 'portfolios', 'benefits', 'technologies', 'cta'
+            'hero', 'servicearticles', 'portfolios', 'benefits', 'technologies', 'cta','services', 'partners'
         ));
     }
 
@@ -44,18 +47,22 @@ class HomeController extends Controller
     {
        $team = $this->teamService->getPublic();
         $partners = $this->partnerService->getPublic();
-        
-        return view('pages.about', compact('team', 'partners'));
+        $services = Service::where('status', 'active')->get();
+        $servicearticles = ServiceArticle::where('status', 'published')->get();
+        return view('pages.about', compact('team', 'partners', 'services', 'servicearticles'));
     }
 
     public function contact()
     {
         $contact = CompanyInfo::first();
-
-        return view('pages.contact', compact('contact'));
+        $services = Service::where('status', 'active')->get();
+        
+        $servicearticles = ServiceArticle::where('status', 'published')->get();
+        return view('pages.contact', compact('contact', 'services', 'servicearticles'));
     }
 public function servicearticle($slug)
     {
+        $services = Service::where('status', 'active')->get();
         $article = ServiceArticle::where('slug', $slug)
             ->where('status', 'published')
             ->first();
@@ -78,6 +85,8 @@ public function servicearticle($slug)
         }
 
         $service = $article->service;
+    
+        $servicearticles = ServiceArticle::where('status', 'published')->get();
 
         $relatedArticles = ServiceArticle::where('service_id', $service->id)
             ->where('id', '!=', $article->id)
@@ -86,6 +95,6 @@ public function servicearticle($slug)
             ->limit(3)
             ->get();
 
-        return view('pages.service-article', compact('article', 'service', 'relatedArticles'));
+        return view('pages.service-article', compact('article', 'service', 'relatedArticles', 'services', 'servicearticles'));
     }
 }

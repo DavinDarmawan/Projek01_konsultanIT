@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
     TestimonialSeeder::class,
     ClientSeeder::class,
     FaqSeeder::class,
+    CtaSeeder::class,
 ]);
     }
 }

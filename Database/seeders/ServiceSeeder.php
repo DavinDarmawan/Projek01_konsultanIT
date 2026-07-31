@@ -12,48 +12,44 @@ class ServiceSeeder extends Seeder
         $services = [
 
             [
-                'title' => 'Software Development',
-                'slug' => 'software-development'
+                'title' => 'Software Development'
             ],
 
             [
-                'title' => 'Website CMS',
-                'slug' => 'website-cms'
+                'title' => 'Website CMS'
             ],
 
             [
-                'title' => 'E-Raport Sekolah',
-                'slug' => 'e-raport'
+                'title' => 'E-Raport Sekolah'
             ],
 
             [
-                'title' => 'Kehosting.in',
-                'slug' => 'kehosting'
+                'title' => 'Kehosting.in'
             ],
 
             [
-                'title' => 'Legal Dari Kita',
-                'slug' => 'legal-dari-kita'
+                'title' => 'Legal Dari Kita'
             ],
 
             [
-                'title' => 'Training',
-                'slug' => 'training'
+                'title' => 'Training'
             ],
 
             [
-                'title' => 'Balanja.id',
-                'slug' => 'balanja-id'
+                'title' => 'Balanja.id'
             ]
         ];
 
         foreach ($services as $service) {
 
             Service::create([
+
                 'title' => $service['title'],
-                'slug' => $service['slug'],
+
                 'description' => $service['title'].' Service',
+
                 'status' => 'active',
+
                 'created_by' => 1
             ]);
         }

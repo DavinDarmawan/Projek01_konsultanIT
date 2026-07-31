@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Service; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Helpers\ActivityLogger;
 
 class ServiceController extends Controller
 {
@@ -44,7 +45,7 @@ class ServiceController extends Controller
         
         $service = new Service();
         $service->title = $request->title;
-        $service->slug = Str::slug($request->title); // Membuat slug otomatis dari judul
+
         $service->description = $request->description;
         $service->benefits = $request->benefits;
         $service->technologies = $request->technologies;

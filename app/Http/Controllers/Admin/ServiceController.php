@@ -35,22 +35,15 @@ class ServiceController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'status'      => 'required|in:active,inactive',
-            'image'       => 'nullable|image|max:2048',
         ]);
 
         $service = new Service();
         $service->title       = $request->title;
-        $service->slug        = Str::slug($request->title);
         $service->description = $request->description;
-        $service->benefits    = $request->benefits;
         $service->technologies = $request->technologies;
         $service->status      = $request->status;
         $service->created_by  = auth()->id();
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('services', 'public');
-            $service->image = $path;
-        }
 
         $service->save();
 
@@ -76,25 +69,14 @@ class ServiceController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
             'status'      => 'required|in:active,inactive',
-            'image'       => 'nullable|image|max:2048',
         ]);
 
         $service = Service::findOrFail($id);
         $service->title       = $request->title;
-        $service->slug        = Str::slug($request->title);
         $service->description = $request->description;
-        $service->benefits    = $request->benefits;
         $service->technologies = $request->technologies;
         $service->status      = $request->status;
 
-        if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($service->image && \Storage::exists('public/' . $service->image)) {
-                \Storage::delete('public/' . $service->image);
-            }
-            $path = $request->file('image')->store('services', 'public');
-            $service->image = $path;
-        }
 
         $service->save();
 
@@ -108,10 +90,6 @@ class ServiceController extends Controller
     public function destroy($id)
     {
         $service = Service::findOrFail($id);
-        // Hapus gambar jika ada
-        if ($service->image && \Storage::exists('public/' . $service->image)) {
-            \Storage::delete('public/' . $service->image);
-        }
         $service->delete();
 
         return redirect()->route('admin.services.index')

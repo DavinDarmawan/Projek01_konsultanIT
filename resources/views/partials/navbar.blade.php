@@ -27,7 +27,7 @@
 
                 <!-- CTA Button -->
                 <div class="d-flex">
-                    <a href="#kontak" class="btn btn-custom btn-custom-primary">
+                    <a href="https://wa.me/6281990300100" class="btn btn-custom btn-custom-primary">
                         Mulai Konsultasi <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>

@@ -23,7 +23,9 @@
         <div class="col-6 col-md-3 fade-in-up-ready delay-{{ ($loop->index % 3) + 1 }}">
             <div class="partner-card partner-card-{{ $loop->index % 4 == 0 ? 'green' : ($loop->index % 4 == 1 ? 'blue' : ($loop->index % 4 == 2 ? 'orange' : 'accent')) }}">
                 <div class="partner-icon">
-                    <i class="bi {{ $partner->icon ?? 'bi-building' }}"></i>
+                    <img src="{{ asset('storage/' . $partner->image) }}"
+                         alt="{{ $partner->company_name ?? $partner->name ?? 'Partner' }}"
+                         style="width: 48px; height: 48px; object-fit: contain; border-radius: 8px; background: #fff; padding: 4px;">    
                 </div>
                 <h6 class="partner-name">{{ $partner->company_name ?? $partner->name ?? 'Partner' }}</h6>
                 <p class="partner-project">{{ $partner->project_name ?? $partner->project ?? '' }}</p>

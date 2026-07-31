@@ -37,11 +37,11 @@
                     <div class="team-card">
                         <div class="team-avatar-wrapper">
                             <div class="team-avatar">
-                                <img 
-                                    src="{{ $image ? asset('storage/team/'. $image) : 'https://ui-avatars.com/api/?name='.urlencode($name).'&background=2e7d32&color=fff&size=120&bold=true' }}" 
-                                    alt="{{ $name }} - {{ $position }}"
-                                    onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($name) }}&background=2e7d32&color=fff&size=120&bold=true'"
-                                >
+<img 
+    src="{{ $image ? asset('storage/' . $image) : 'https://ui-avatars.com/api/?name='.urlencode($name).'&background=2e7d32&color=fff&size=120&bold=true' }}" 
+    alt="{{ $name }} - {{ $position }}"
+    onerror="this.src='https://ui-avatars.com/api/?name={{ urlencode($name) }}&background=2e7d32&color=fff&size=120&bold=true'"
+>
                                 <div class="team-avatar-border" style="border-color: {{ $color }};"></div>
                             </div>
                             <div class="team-status">
