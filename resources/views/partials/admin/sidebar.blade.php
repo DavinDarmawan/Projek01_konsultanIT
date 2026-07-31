@@ -22,6 +22,21 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.teams*') ? 'active' : '' }}" href="{{ route('admin.teams.index') }}">
+                <i class="bi bi-people"></i> Tim
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.partners*') ? 'active' : '' }}" href="{{ route('admin.partners.index') }}">
+                <i class="bi bi-handshake"></i> Partner
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->routeIs('admin.service-articles*') ? 'active' : '' }}" href="{{ route('admin.service-articles.index') }}">
+                <i class="bi bi-file-earmark-text"></i> Artikel Service
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.hero*') ? 'active' : '' }}" href="{{ route('admin.hero.edit', 1) }}">
                 <i class="bi bi-image"></i> Hero
             </a>
