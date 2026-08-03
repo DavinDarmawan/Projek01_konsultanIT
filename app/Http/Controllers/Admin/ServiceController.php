@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Helpers\StorageCleanup;
 use Illuminate\Support\Str;
 
 class ServiceController extends Controller
@@ -44,6 +45,12 @@ class ServiceController extends Controller
         $service->status      = $request->status;
         $service->created_by  = auth()->id();
 
+<<<<<<< HEAD
+=======
+        if ($request->hasFile('image')) {
+            $service->image = $request->file('image')->store('services', 'public');
+        }
+>>>>>>> fd11a170967a11fd9c3a3bac9781ba49d23b8232
 
         $service->save();
 
@@ -77,6 +84,14 @@ class ServiceController extends Controller
         $service->technologies = $request->technologies;
         $service->status      = $request->status;
 
+<<<<<<< HEAD
+=======
+        if ($request->hasFile('image')) {
+            // Hapus gambar lama dari storage
+            StorageCleanup::deleteFile($service->image);
+            $service->image = $request->file('image')->store('services', 'public');
+        }
+>>>>>>> fd11a170967a11fd9c3a3bac9781ba49d23b8232
 
         $service->save();
 
@@ -85,14 +100,34 @@ class ServiceController extends Controller
     }
 
     /**
-     * Remove the specified service from storage.
+     * Remove the specified service and all related data from storage.
      */
     public function destroy($id)
     {
         $service = Service::findOrFail($id);
+<<<<<<< HEAD
+=======
+
+        // Hapus gambar service dari storage
+        StorageCleanup::deleteFile($service->image);
+
+        // Hapus semua ServiceArticle terkait beserta file-nya
+        foreach ($service->articles as $article) {
+            StorageCleanup::deleteFile($article->featured_image);
+            $article->delete();
+        }
+
+        // Hapus semua Benefit terkait
+        $service->benefits()->delete();
+
+        // Hapus semua Technology terkait
+        $service->technologies()->delete();
+
+        // Hapus record service dari database
+>>>>>>> fd11a170967a11fd9c3a3bac9781ba49d23b8232
         $service->delete();
 
         return redirect()->route('admin.services.index')
-                         ->with('success', 'Service berhasil dihapus.');
+                         ->with('success', 'Service beserta data terkait berhasil dihapus.');
     }
 }

@@ -130,3 +130,37 @@
         </div>
     </div>
 </section>
+        </div>
+    </div>
+</section> <!-- Ini penutup section asli -->
+
+<!-- Tambahkan kodenya di bawah sini -->
+<style>
+    .hero-stats-wrapper .stat-item {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 16px;
+        padding: 14px 18px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .hero-stats-wrapper .stat-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 107, 76, 0.15);
+        border-color: rgba(0, 107, 76, 0.3);
+    }
+    
+    .hero-stats-wrapper .stat-item h3 {
+        font-size: 1.8rem;
+        margin-bottom: 2px;
+    }
+    
+    .hero-stats-wrapper .stat-item p {
+        color: #374151 !important;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+</style>

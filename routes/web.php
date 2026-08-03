@@ -31,6 +31,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::resource('services', ServiceController::class);
     Route::resource('portfolios', PortfolioController::class);
+    Route::resource('teams', TeamController::class);
+    Route::resource('partners', PartnerController::class);
+    Route::resource('service-articles', ServiceArticleController::class);
     Route::get('hero/{id}/edit', [HeroController::class, 'edit'])->name('hero.edit');
     Route::put('hero/{id}', [HeroController::class, 'update'])->name('hero.update');
     Route::resource('benefits', BenefitController::class);

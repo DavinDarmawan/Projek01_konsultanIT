@@ -26,8 +26,7 @@
                         <div class="portfolio-wrapper">
                             <div class="portfolio-img-container">
                                 @if($img)
-                                    <img src="{{ $img }}" alt="{{ $portfolio->title }}" style="width:100%; height:100%; object-fit:cover;">
-                                @else
+                                <img src="{{ $img }}" alt="{{ $portfolio->title }}" class="portfolio-image">                                @else
                                     <div class="portfolio-placeholder {{ $patternClass }}">
                                         <i class="bi bi-window-sidebar text-primary fs-1"></i>
                                     </div>
@@ -137,15 +136,24 @@
         background: #e9ecef;
     }
 
-    .portfolio-img-container img,
-    .portfolio-placeholder {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+    .portfolio-img-container img{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:20px;
+    background:#fff;
+}
+
+.portfolio-placeholder{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
 
     .portfolio-placeholder {
         display: flex;
